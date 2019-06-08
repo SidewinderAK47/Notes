@@ -1,0 +1,185 @@
+配置尽量简单，并且存在约定，屏蔽了spring内部细节，使得spring开箱后能够简单经过配置后让开发者使用，满足开发者能够快速开发，部署和测试。
+
+
+
+Spring Boot参数配置除了使用properties文件之外，
+
+- 命令行参数
+- 来自`java:comp/env` 的JNDI属性；
+- Java系统属性（`System.getProperties()`）;
+- 操作系统环境变量
+- `RandomValuePropertySource`配置的`random.*`属性值；
+- jar包外部的application-{profile}.properties或application.yml(带spring.profile)配置文件；
+- jar包内部的application-{profile}.properties或application.yml(带spring.profile)配置文件；
+- jar包外部的application-{profile}.properties或application.yml(不带spring.profile)配置文件；
+- jar包内部的application-{profile}.properties或application.yml(不带spring.profile)配置文件；
+- @Configuration注解类上 @PropertySource；
+- 通过`SpringApplication.setDefaultProperties`指定默认的属性。
+
+## 配置文件
+
+```properties
+server.port=8090
+# 定义视图前后缀
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+# 这里意思是找到WEB-INF/jsp/文件夹下，以.jsp为后缀的文件。
+# 名称前缀和后缀之间由一个文件给出。
+# 前缀和后缀之前少了一个名称，这个名称是由控制器Control给出的，为此新建一个控制器IndexController。
+
+```
+
+## 控制器
+
+```Java
+package com.springboot.chapter2.main;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class IndexController {
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+}
+```
+
+映射了一个/index路径，然后返回了一个"index"，这样加上配置文件配置的前缀和后缀就可以结合起来找到一个`jsp`文件。
+
+## 视图
+
+```jsp
+<%@ page  contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+        <title>Spring boot视图</title>
+    </head>
+    <body>
+        <h1>学习使我快乐</h1>
+
+    </body>
+</html>
+```
+
+
+
+
+
+作者：启蛰
+
+链接：https://zhuanlan.zhihu.com/p/33155755
+
+来源：知乎
+
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+切到Spring boot之后有些不适应，或者以前的老项目都是JSP的没有做前后端分离的，都需要用到JSP，Spring boot默认是不支持JSP的,那么如何开启呢？本章将添加支持，详细步骤如下。
+
+第一步,新建springboot_jsp项目，添加WEB支持，在POM文件中添加如下JAR包
+
+```xml
+<!--配置servlet-->  
+        <dependency>  
+            <groupId>javax.servlet</groupId>  
+            <artifactId>javax.servlet-api</artifactId>  
+        </dependency>  
+  
+        <!--配置jsp jstl的支持-->  
+        <dependency>  
+            <groupId>javax.servlet</groupId>  
+            <artifactId>jstl</artifactId>  
+        </dependency>  
+  
+        <!--添加对tomcat的支持-->  
+        <dependency>  
+           <groupId>org.springframework.boot</groupId>  
+           <artifactId>spring-boot-starter-tomcat</artifactId>  
+            <scope>provided</scope>  
+        </dependency>  
+  
+        <!--对jsp的支持-->  
+        <dependency>  
+            <groupId>org.apache.tomcat.embed</groupId>  
+            <artifactId>tomcat-embed-jasper</artifactId>  
+        </dependency>  
+```
+
+第二步，在配置文件中配置（系统自动生成的[application.properties](https://link.zhihu.com/?target=http%3A//application.properties/)，把后缀名字改为yml）
+
+```xml
+spring:
+   mvc:
+     view:
+        prefix: /WEB-INF/jsp/
+        suffix: .jsp
+```
+
+第三步，创建如下目录，并且编写index.jsp
+
+![img](https://pic2.zhimg.com/v2-d8ae83e23f55bc4d511c9951f79da129_b.jpg)
+
+jsp代码
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Spring Boot JSP</title>
+</head>
+<body>
+Hello Spring My name is jsp！
+</body>
+</html>
+```
+
+第四步，编写测试TestController
+
+```text
+@Controller
+public class TestController {
+    @RequestMapping("index")
+    public String test(){
+        return "index";
+    }
+
+    /**
+     * 不要在类上标@RestController
+     * 会把类的返回结果都变成JSON
+     * 视图解析也就不会解析到页面了
+     * 会直接返回页面
+     * @return
+     */
+    @RequestMapping("test")
+    @ResponseBody
+    public String test1(){
+        return "index";
+    }
+}
+```
+
+第五步，测试
+
+Spring Boot默认的启动方式不会访问到WEB-INF下的页面，所以我们有两种启动方法
+
+1，打成WAR包
+
+2,  用Maven命令启动
+
+
+
+1).这里演示第二种，点开Idea的maven组件，双击运行
+
+![img](https://pic2.zhimg.com/v2-d3b697c7cd00f4ceea25bfbcb872b185_b.jpg)
+
+![img](https://pic3.zhimg.com/v2-194752c1e26978652b0e5412a2c67d4e_b.jpg)启动成功，端口为8080
+
+2).访问[http://localhost:8080/index](https://link.zhihu.com/?target=http%3A//localhost%3A8080/index)
+
+![img](https://pic1.zhimg.com/v2-f261cee80cceea3c9b7c2a68aff55f90_b.jpg)测试成功
+
+3).注意，不要在类上标@RestController，会把类的返回结果都变成JSON，视图解析也就不会解析到页面了，会直接返回JSON，如需在一个类中使用可以用@ResponseBody 在方法上标注，效果一样。

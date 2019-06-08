@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.i18n.reload" value="false"/>
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
+
+   <!-- <include file="struts-default.xml"/>-->
+
+    <!--
+       action元素详解
+       name：action的访问资源名称。
+       class：action的完整类名。
+       method：指定调用action类中那个方法处理请求。
+    -->
+
+<!--    <package name="default" extends="struts-default" namespace="/mynamespace">
+
+        <action name="login" class="com.demo.action.DemoAction" >
+            <result name="success">/index.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+
+    </package>-->
+    <!--<package name="user" extends="struts-default" namespace="/">-->
+
+        <!--<action name="login" class="com.action.LoginAction" method="execute">-->
+            <!--<result name="success">/Hello.jsp</result>-->
+        <!--</action>-->
+        <!--<action name="display" class="com.action.Demo1Action" method="execute">-->
+            <!--<result name="success">/display.jsp</result>-->
+        <!--</action>-->
+
+        <!--<action name="birthday" class="com.action.BirthdayAndAgeAction" method="execute">-->
+            <!--<result name="success">/welcome.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+
+
+
+    <package name="user" namespace="/" extends="struts-default">
+      <!--拦截器-->
+<!--       <interceptors>
+           <interceptor-stack name="myStack">
+               <interceptor-ref name="token"/>
+               <interceptor-ref name="defaultStack"/>
+           </interceptor-stack>
+       </interceptors>
+        <default-interceptor-ref name="myStack"/>  -->
+        <!--拦截器 end-->
+
+        <!-- <interceptors>
+            <interceptor name="interceptor3" class="com.interceptor.InterceptorDemo3"/>
+        </interceptors>
+        <action name="edituser" class="com.action.UserAction" method="edit">
+            <result name="success">/edituser.jsp</result>
+            <interceptor-ref name="interceptor3"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="adduser" class="com.action.UserAction" method="add">
+            <result name="success">/adduser.jsp</result>
+            <interceptor-ref name="interceptor3">
+                 <param name="excludeMethods">add</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+        </action>-->
+
+        <action name="userAction" class="com.action.UserAction">
+            <result name="success">/welcome.jsp</result>
+
+            <!--<result name="input">/login.jsp</result>-->
+        </action>
+    </package>
+
+    <!--<action name="*_user" class="com.action.UserAction" method="{1}">-->
+
+    <!--<result name="success">/{1}user.jsp</result>-->
+    <!--<interceptor-ref name="interceptor2"/>-->
+    <!--<interceptor-ref name="defaultStack"/>-->
+    <!--</action>-->
+
+<!--    <package name="user" namespace="/" extends="struts-default">
+       &lt;!&ndash;配置拦截器名&ndash;&gt;
+        <interceptors>
+            <interceptor name="Interceptor1" class="com.interceptor.InterceptorDemo1"></interceptor>
+            &lt;!&ndash;将自己的拦截器，加入拦截器中&ndash;&gt;
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="Interceptor1"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+        <global-results>
+            <result name="fail" type="redirect">/login.jsp</result>
+            <result name="success">/welcome.jsp</result>
+        </global-results>
+
+        <action name="useradd" class="com.action.UserAction" method="add" >
+            <result name="success">/adduser.jsp</result>
+            &lt;!&ndash;如果项目中使用了自定义的拦截器，那么默认拦截器就不在使用了&ndash;&gt;
+            <interceptor-ref name="Interceptor1"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+    </package>
+    <package name="login" namespace="/" extends="struts-default">
+        <action name="login" class="com.action.LoginAction" method="login">
+            <result name="success">/welcome.jsp</result>
+        </action>
+        <action name="logout" class="com.action.LoginAction" method="logout">
+            <result name="success">/logout.jsp</result>
+        </action>
+    </package>-->
+
+</struts>
