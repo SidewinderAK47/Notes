@@ -1,5 +1,7 @@
 ## …or create a new repository on the command line
 
+但是我们主要会用的命令其实也就这么几个，没有这么花里胡哨的。
+
 ```shell
 echo "# Notes" >> README.md
 git init
