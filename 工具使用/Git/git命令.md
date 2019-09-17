@@ -42,8 +42,14 @@ git config --global user.email [邮箱地址]
 a)、查看状态： git status(查看工作区、暂存区的状态)
 
 b)、添加操作: git add 文件名(将工作区新建/修改的内容添加到暂存区)  添加所有修改 
+```shell
     git add .
+    git add -A .  # 来一次添加所有改变的文件。（常用）
+    git add -A #表示添加所有内容，
+    git add .  # 表示添加新文件和编辑过的文件不包括删除的文件; 
+    git add -u # 表示添加编辑或者删除的文件，不包括新添加的文件。
 
+```
 c)、提交操作： git commit -m “commit message” 文件名(将暂存区的内容提交到本地库)
 
 d)、提交远程仓库：git push origin master  提交到远程仓库某分支
