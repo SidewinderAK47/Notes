@@ -14,15 +14,13 @@ Bandwagon节点 $19.9的选项包括以下几个：
 - NL - Amsterdam (EUNL_3)  荷兰的阿姆斯特丹
 - Canada - Vancouver (CABC_1) 加拿大 温哥华节点
 
- 
+## 虚拟化技术分析
 
 OVZ：即 OpenVZ 主机虚拟化技术。把一台服务器上面划分出多个虚拟主机使用。支持 IPv6 地址。缺点是可以超售，也就是超出母鸡承受能力的那种，主机商能够多卖钱。
 
- 
-
 KVM：也是主机虚拟化技术，和 OVZ 一样在母鸡上划分出多台小鸡来。不支持 IPv6 地址。性能分配比 OVZ 更均衡，也很难超售。
 
- 
+##  线路分析
 
 CN2：线路名称，走的是中国电信网络，目前包括搬瓦工 DC3 机房（QNET 机房）和 DC8 机房（C3 机房）。CN2 连接速度和稳定性普通网络要好，搬瓦工推荐选择 CN2 机房。
 
@@ -30,9 +28,7 @@ QNET 和 MCOM：都是机房的名字，目前都是搬瓦工比较好的线路�
 
 最后总结一下，对于搬瓦工 VPS 来说，最合适的选择是优先考虑 KVM，然后选择可迁移机房 CN2 线路，这样是最好的。
 
-
-
-Bandwagonhost
+## VPS供应商Bandwagonhost
 
 搬瓦工vps信息
 
@@ -45,10 +41,6 @@ Bandwagonhost
 - US: New York [USNY_2] 
 - CA: British Columbia, Vancouver [CABC_1] 
 - EU: Amsterdam, Netherlands [EUNL_3] 
-
-
-
-
 
 
 
@@ -190,6 +182,12 @@ Once migration completes, you will receive an e-mail notification.
 ![1568887939922](常用的VPS.assets/1568887939922.png)
 
 当前位置：
+
+
+
+## Ping工具网站（世界各地ping 你的主机）
+
+http://port.ping.pe
 
 被墙状态：
 
