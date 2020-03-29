@@ -347,7 +347,7 @@ J对x的导数应该是什么呢？
 
 我们今天来体验一下PyTorch的自动求导吧，好为后面的搭建模型做准备。
 
-## **一、设置Tensor的自动求导属性**
+## **（1）、设置Tensor的自动求导属性**
 
 所有的tensor都有`.requires_grad`属性，都可以设置成自动求导。具体方法就是在定义tensor的时候，让这个属性为True：
 `x = tensor.ones(2,4,requires_grad=True)`
@@ -385,7 +385,7 @@ In [21]: print(x.requires_grad,y.requires_grad)False True
 
 这里，**注意区别**`tensor.requires_grad`和`tensor.requires_grad_()`两个东西，前面是调用变量的属性值，后者是调用内置的函数，来改变属性。
 
-## **二、来求导吧**
+## **（2）、来求导吧**
 
 下面我们来试试自动求导到底怎么样。
 
@@ -456,7 +456,7 @@ J对x的导数应该是什么呢？
 
 
 
-## **三、关于`backward`函数的一些其他问题：**
+## （3）、关于`backward`函数的一些其他问题：**
 
 ## 1. 不是标量也可以用backward()函数来求导？
 
