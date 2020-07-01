@@ -1,6 +1,6 @@
 ## …or create a new repository on the command line
 
-但是我们主要会用的命令其实也就这么几个，没有这么花里胡哨的。
+但是我主要会用的命令其实也就这么几个，没有这么花里胡哨的。
 
 ```shell
 echo "# Notes" >> README.md
@@ -9,6 +9,8 @@ git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/SidewinderAK47/Notes.git
 git push -u origin master
+
+git add -A # 提交修改
 ```
 
 ## …or push an existing repository from the command line
@@ -124,3 +126,4 @@ $ git push [remote-name] [branch-name]
 ```
 
 只有在所克隆的服务器上有写权限，或者同一时刻没有其他人在推数据，这条命令才会如期完成任务。如果在你推数据前，已经有其他人推送了若干更新，那你的推送操作就会被驳回。你必须先把他们的更新抓取到本地，合并到自己的项目中，然后才可以再次推送。有关推送数据到远程仓库的详细内容见第三章。
+
