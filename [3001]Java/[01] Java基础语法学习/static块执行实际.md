@@ -83,9 +83,6 @@ class Demo2 {
 ```Java
 public class StaticDemo {
     public static void main(String[] args) {
-        //Demo1 demo = new Demo1();
-        //Demo1.StaticMethod();
-        //Demo2.a =2;
         try {
             Class.forName("com.wxd.Demo1");
         } catch (ClassNotFoundException e) {
@@ -98,7 +95,6 @@ class Demo1 {
     static {
         System.out.println("Demo1 static block !");
     }
-
     public static void StaticMethod() {
         System.out.println("Static Method !");
     }
